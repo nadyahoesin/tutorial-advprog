@@ -46,16 +46,23 @@ public class ProductController {
     public String editProductPage(@RequestParam(name="productName") String productName, Model model) {
         Product product = service.find(productName);
         model.addAttribute("product", product);
-        model.addAttribute("productForNewProductName", new Product());
+        model.addAttribute("throwAwayProduct", new Product());
         return "editProduct";
     }
 
     @PostMapping("/edit")
-    public String editProductName(@RequestParam(name="oldProductName") String oldProductName,
-                                  @ModelAttribute Product productForNewProductName,
+    public String editProductName(@RequestParam(name="oldProductName") String productName,
+                                  @ModelAttribute Product throwAwayProduct,
                                   Model model) {
-        String newProductName = productForNewProductName.getProductName();
-        service.editName(oldProductName, newProductName);
+        String newProductName = throwAwayProduct.getProductName();
+        int newProductQuantity = throwAwayProduct.getProductQuantity();
+
+        if (!newProductName.isEmpty()) {
+            service.editName(productName, newProductName);
+        }
+
+        service.editQuantity(productName, newProductQuantity);
+
         return "redirect:list";
     }
 }

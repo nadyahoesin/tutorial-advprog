@@ -40,7 +40,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void editName(String oldProductName, String newProductName) {
-        productRepository.editName(oldProductName, newProductName);
+    public void editName(String productName, String newProductName) {
+        productRepository.editName(productName, newProductName);
+    }
+
+    @Override
+    public void editQuantity(String productName, int newProductQuantity) {
+        productRepository.editQuantity(productName, newProductQuantity);
     }
 }
