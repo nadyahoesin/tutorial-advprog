@@ -36,9 +36,9 @@ public class ProductController {
         return "listProduct";
     }
 
-    @GetMapping("/delete/{productName}")
-    public String deleteProduct(@PathVariable String productName, Model model) {
+    @GetMapping("/delete")
+    public String deleteProduct(@RequestParam(name="productName") String productName, Model model) {
         service.delete(productName);
-        return "listProduct";
+        return "redirect:list";
     }
 }
