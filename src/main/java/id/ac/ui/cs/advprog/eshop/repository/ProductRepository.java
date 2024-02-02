@@ -35,8 +35,8 @@ public class ProductRepository {
         productData.remove(product);
     }
 
-    public void editName(String productName) {
-        Product product = find(productName);
-        product.setProductName(productName);
+    public void editName(String oldProductName, String newProductName) {
+        Product product = find(oldProductName);
+        product.setProductName(newProductName);
     }
 }

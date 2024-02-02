@@ -11,9 +11,9 @@
     <h3>Edit Product</h3>
     <a th:href="@{/product/list}" class="btn btn-primary btn-sm mb-3">Back</a>
 
-    <form th:action="|@{/product/edit/${product.productName}}|" method="post">
+    <form th:action="@{/product/edit(oldProductName=${product.productName})}" th:object="${productForNewProductName}" method="post">
         <label for="nameInput">Name</label>
-        <input th:object="${newProductName}" type="text" class="form-control mb-4 col-4" id="nameInput" th:placeholder="${product.productName}">
+        <input th:field="${productForNewProductName.productName}" type="text" class="form-control mb-4 col-4" id="nameInput" th:placeholder="${product.productName}">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 <!--    <form>-->

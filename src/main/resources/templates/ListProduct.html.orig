@@ -25,10 +25,14 @@
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
             <td>
-                <a th:href="@{/product/edit(productName=${product.productName})}" class="btn-primary btn-sm mb-3">Edit</a>
+<<<<<<< HEAD
+                <a th:href="|@{/product/edit/${product.productName}}|" class="btn-danger btn-sm mb-3">Edit</a>
             </td>
             <td>
+                <a th:href="|@{/product/delete/${product.productName}}|" class="btn-danger btn-sm mb-3">Delete</a>
+=======
                 <a th:href="@{/product/delete(productName=${product.productName})}" class="btn-danger btn-sm mb-3">Delete</a>
+>>>>>>> delete-product
             </td>
         </tr>
         </tbody>
