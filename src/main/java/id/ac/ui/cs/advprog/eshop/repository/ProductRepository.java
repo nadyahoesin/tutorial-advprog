@@ -16,17 +16,27 @@ public class ProductRepository {
         return product;
     }
 
+    public Product find(String productName) {
+        for (Product product: productData) {
+            if (product.getProductName().equals(productName)) {
+                return product;
+            }
+        }
+
+        return new Product();
+    }
+
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
 
     public void delete(String productName) {
-        for (Product product: productData) {
-            if (product.getProductName().equals(productName)) {
-                productData.remove(product);
-                product = null;
-                break;
-            }
-        }
+        Product product = find(productName);
+        productData.remove(product);
+    }
+
+    public void editName(String productName) {
+        Product product = find(productName);
+        product.setProductName(productName);
     }
 }
