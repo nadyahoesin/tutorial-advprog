@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -50,19 +51,21 @@ public class ProductController {
         return "editProduct";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/editName")
     public String editProductName(@RequestParam(name="oldProductName") String productName,
                                   @ModelAttribute Product throwAwayProduct,
                                   Model model) {
         String newProductName = throwAwayProduct.getProductName();
+        service.editName(productName, newProductName);
+        return "redirect:list";
+    }
+
+    @PostMapping("/editQuantity")
+    public String editProductQuantity(@RequestParam(name="oldProductName") String productName,
+                                  @ModelAttribute Product throwAwayProduct,
+                                  Model model) {
         int newProductQuantity = throwAwayProduct.getProductQuantity();
-
-        if (!newProductName.isEmpty()) {
-            service.editName(productName, newProductName);
-        }
-
         service.editQuantity(productName, newProductQuantity);
-
         return "redirect:list";
     }
 }
