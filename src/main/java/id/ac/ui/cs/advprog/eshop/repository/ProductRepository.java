@@ -23,7 +23,7 @@ public class ProductRepository {
             }
         }
 
-        return new Product();
+        return null;
     }
 
     public Iterator<Product> findAll() {

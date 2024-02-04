@@ -64,4 +64,54 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFind() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product productFromFind = productRepository.find("Sampo Cap Bambang");
+        assertEquals(product, productFromFind);
+    }
+
+    @Test
+    void testDelete() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.delete("Sampo Cap Bambang");
+        assertNull(productRepository.find("Sampo Cap Bambang"));
+    }
+
+    @Test
+    void testEditName() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.editName("Sampo Cap Bambang", "Sampo Cap Budi");
+        assertEquals("Sampo Cap Budi", product.getProductName());
+        assertNotEquals("Sampo Cap Bambang", product.getProductName());
+    }
+
+    @Test
+    void testEditQuantity() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.editQuantity("Sampo Cap Bambang", 50);
+        assertEquals(50, product.getProductQuantity());
+        assertNotEquals(100, product.getProductQuantity());
+    }
 }
