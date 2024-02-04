@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Product List</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Product List</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    </head>
 
-<div class="container my-2">
-    <h2>Product' List</h2>
-    <a th:href="@{/product/create}" class="btn btn-primary btn-sm mb-3">Create Product</a>
+    <body class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+    <div class="flex h-screen">
+        <div class="bg-white p-8 rounded-lg mt-20 m-auto text-center w-4/5">
+            <h2 class="text-4xl font-bold mb-6">List of Products</h2>
+            <a th:href="@{/product/create}">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-10 w-60 text-lg">Create a product</button>
+            </a>
 
-    <table border="1" class="table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th scope="col">Product Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product: ${products}">
-            <td th:text="${product.productName}"></td>
-            <td th:text="${product.productQuantity}"></td>
-            <td>
-                <a th:href="@{/product/edit(productName=${product.productName})}" class="btn-primary btn-sm mb-3">Edit</a>
-            </td>
-            <td>
-                <a th:href="@{/product/delete(productName=${product.productName})}" class="btn-danger btn-sm mb-3">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+            <!-- max-h gabisa?? -->
+            <div class="max-h-96 overflow-y-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                    <tr>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Product Name</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Quantity</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Edit</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product: ${products}">
+                        <td th:text="${product.productName}" class="py-2 px-6 border-b border-r"></td>
+                        <td th:text="${product.productQuantity}" class="py-2 px-6 border-b border-r"></td>
+                        <td class="py-2 px-6 border-b border-r">
+                            <a th:href="@{/product/edit(productName=${product.productName})}">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Edit</button>
+                            </a>
+                        </td>
+                        <td class="py-2 px-6 border-b border-r">
+                            <a th:href="@{/product/delete(productName=${product.productName})}">
+                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </body>
 </html>
