@@ -102,6 +102,7 @@ public class ProductRepositoryTest {
         assertNotEquals("Sampo Cap Bambang", product.getProductName());
     }
 
+    @Test
     void testEditQuantity() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
