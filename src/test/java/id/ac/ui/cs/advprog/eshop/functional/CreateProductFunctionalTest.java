@@ -55,5 +55,16 @@ public class CreateProductFunctionalTest {
         quantityInput.sendKeys("10");
         WebElement submitButton = driver.findElement(By.name("submit_button"));
         submitButton.click();
+
+        List<WebElement> allTdElements = driver.findElements(By.tagName("td"));
+        WebElement myCreationElement = null;
+        for (WebElement TdElement : allTdElements) {
+            if (TdElement.getText().equals("Meja")) {
+                myCreationElement = TdElement;
+                break;
+            }
+        }
+
+        assertNotNull(myCreationElement);
     }
 }
