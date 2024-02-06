@@ -30,18 +30,30 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public void delete(String productName) {
+    public void delete(String productName) throws Exception {
         Product product = find(productName);
+        if (product == null) {
+            throw new Exception("Product doesn't exist");
+        }
+
         productData.remove(product);
     }
 
-    public void editName(String productName, String newProductName) {
+    public void editName(String productName, String newProductName) throws Exception {
         Product product = find(productName);
+        if (product == null) {
+            throw new Exception("Product doesn't exist");
+        }
+
         product.setProductName(newProductName);
     }
 
-    public void editQuantity(String productName, int newProductQuantity) {
+    public void editQuantity(String productName, int newProductQuantity) throws Exception {
         Product product = find(productName);
+        if (product == null) {
+            throw new Exception("Product doesn't exist");
+        }
+
         product.setProductQuantity(newProductQuantity);
     }
 }
