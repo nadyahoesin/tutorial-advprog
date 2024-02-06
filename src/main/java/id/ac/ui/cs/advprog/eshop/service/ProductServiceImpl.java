@@ -31,7 +31,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(String productName) {
-        productRepository.delete(productName);
+        try {
+            productRepository.delete(productName);
+        } catch (Exception e) {}
     }
 
     @Override
@@ -41,11 +43,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void editName(String productName, String newProductName) {
-        productRepository.editName(productName, newProductName);
+        try {
+            productRepository.editName(productName, newProductName);
+        } catch (Exception e) {}
     }
 
     @Override
     public void editQuantity(String productName, int newProductQuantity) {
-        productRepository.editQuantity(productName, newProductQuantity);
+        try {
+            productRepository.editQuantity(productName, newProductQuantity);
+        } catch (Exception e) {}
     }
 }
