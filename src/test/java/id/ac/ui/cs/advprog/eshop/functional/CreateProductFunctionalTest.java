@@ -16,6 +16,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -55,15 +56,15 @@ public class CreateProductFunctionalTest {
         WebElement submitButton = driver.findElement(By.name("submit_button"));
         submitButton.click();
 
-//        List<WebElement> all = driver.findElement()
+        List<WebElement> allTdElements = driver.findElements(By.tagName("td"));
+        WebElement myCreationElement = null;
+        for (WebElement TdElement : allTdElements) {
+            if (TdElement.getText().equals("Meja")) {
+                myCreationElement = TdElement;
+                break;
+            }
+        }
 
-//        By nameInTableLocator = RelativeLocator.with(By.tagName("td")).below(By.name("product_name_header"));
-//        String nameInTable = driver.findElement(nameInTableLocator).getText();
-//        assertEquals("Meja", nameInTable);
-//
-//        By quantityInTableLocator = RelativeLocator.with(By.tagName("td")).toRightOf(nameInTableLocator);
-//        String quantityInTable = driver.findElement(quantityInTableLocator).getText();
-//        assertEquals("10", quantityInTable);
-
+        assertNotNull(myCreationElement);
     }
 }
