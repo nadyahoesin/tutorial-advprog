@@ -20,5 +20,3 @@ jobs:
           app-name: eshop
           git-builder: docker
           git-docker-dockerfile: Dockerfile
-          privileged: true
-          skip-cache: true
