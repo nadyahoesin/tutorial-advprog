@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -105,37 +106,37 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void testDelete() throws Exception {
+    void testDelete() throws NoSuchElementException {
         doNothing().when(productRepository).delete("Sampo Cap Bambang");
         assertDoesNotThrow(() -> productService.delete("Sampo Cap Bambang"));
     }
 
     @Test
-    void testDeleteIfNotExist() throws Exception {
+    void testDeleteIfNotExist() throws NoSuchElementException {
         doThrow(Exception.class).when(productRepository).delete("Sampo Cap Bambang");
         assertThrows(Exception.class, () -> productService.delete("Sampo Cap Bambang"));
     }
 
     @Test
-    void testEditName() throws Exception {
+    void testEditName() throws NoSuchElementException {
         doNothing().when(productRepository).editName("Sampo Cap Bambang", "Sampo Cap Budi");
         assertDoesNotThrow(() -> productService.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
     }
 
     @Test
-    void testEditNameIfNotExist() throws Exception {
+    void testEditNameIfNotExist() throws NoSuchElementException {
         doThrow(new Exception()).when(productRepository).editName("Sampo Cap Bambang", "Sampo Cap Budi");
         assertThrows(Exception.class, () -> productService.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
     }
 
     @Test
-    void testEditQuantity() throws Exception {
+    void testEditQuantity() throws NoSuchElementException {
         doNothing().when(productRepository).editQuantity("Sampo Cap Bambang", 50);
         assertDoesNotThrow(() -> productService.editQuantity("Sampo Cap Bambang", 50));
     }
 
     @Test
-    void testEditQuantityIfNotExist() throws Exception {
+    void testEditQuantityIfNotExist() throws NoSuchElementException {
         doThrow(new Exception()).when(productRepository).editQuantity("Sampo Cap Bambang", 50);
         assertThrows(Exception.class, () -> productService.editQuantity("Sampo Cap Bambang", 50));
     }
