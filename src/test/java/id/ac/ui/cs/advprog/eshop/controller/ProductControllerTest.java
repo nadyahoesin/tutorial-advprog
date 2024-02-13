@@ -4,15 +4,15 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.NoSuchElementException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -63,13 +63,12 @@ class ProductControllerTest {
                 .andExpect(redirectedUrl("list"));
     }
 
-//    @Test
-//    void testDeleteProductIfNotExist() throws Exception {
-//        doThrow(new Exception()).when(productService).delete("Sampo Cap Budi");
-//        this.mockMvc.perform(get("/product/delete")
-//                        .param("productName", "Sampo Cap Budi"))
-//                .andExpect(status().isBadRequest());
-//    }
+    @Test
+    void testDeleteProductIfNotExist() {
+        doThrow(new NoSuchElementException()).when(productService).delete("Sampo Cap Budi");
+        assertThrows(Exception.class, () -> this.mockMvc.perform(get("/product/delete")
+                        .param("productName", "Sampo Cap Budi")));
+    }
 
 //    @Test
 //    void testEditProductPage() throws Exception {
