@@ -21,5 +21,5 @@ jobs:
           git-builder: docker
           git-docker-dockerfile: Dockerfile
           service-ports: "8080:http"
-          instance-type: free
+          service-instance-type: free
           skip-cache: true
