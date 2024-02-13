@@ -20,6 +20,6 @@ jobs:
           app-name: eshop
           git-builder: docker
           git-docker-dockerfile: Dockerfile
-          service-env: "PORT=8080"
+          service-routes: "/:8080"
           service-instance-type: free
           skip-cache: true
