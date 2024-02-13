@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 @ExtendWith({MockitoExtension.class})
-public class ProductServiceImplTest {
+class ProductServiceImplTest {
     @InjectMocks
     ProductServiceImpl productService;
 
