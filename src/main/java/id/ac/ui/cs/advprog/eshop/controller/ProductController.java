@@ -44,7 +44,10 @@ public class ProductController {
 
     @GetMapping("/product/delete")
     public String deleteProduct(@RequestParam(name="productName") String productName, Model model) {
-        service.delete(productName);
+        try {
+            service.delete(productName);
+        } catch (Exception e) {}
+
         return "redirect:list";
     }
 
@@ -61,7 +64,11 @@ public class ProductController {
                                   @ModelAttribute Product throwAwayProduct,
                                   Model model) {
         String newProductName = throwAwayProduct.getProductName();
-        service.editName(productName, newProductName);
+
+        try {
+            service.editName(productName, newProductName);
+        } catch (Exception e) {}
+
         return "redirect:list";
     }
 
@@ -70,7 +77,11 @@ public class ProductController {
                                   @ModelAttribute Product throwAwayProduct,
                                   Model model) {
         int newProductQuantity = throwAwayProduct.getProductQuantity();
-        service.editQuantity(productName, newProductQuantity);
+
+        try {
+            service.editQuantity(productName, newProductQuantity);
+        } catch (Exception e) {}
+
         return "redirect:list";
     }
 }

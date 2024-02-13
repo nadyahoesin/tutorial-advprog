@@ -147,14 +147,7 @@ public class ProductRepositoryTest {
 
     @Test
     void testEditNameIfEmpty() {
-        Product product = new Product();
-        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(100);
-        productRepository.create(product);
-
-        assertDoesNotThrow(() -> productRepository.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
-        assertEquals("Sampo Cap Budi", product.getProductName());
+        assertThrows(Exception.class, () -> productRepository.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
     }
 
     @Test

@@ -6,8 +6,8 @@ import java.util.List;
 public interface ProductService {
     public Product create(Product product);
     public List<Product> findAll();
-    public void delete(String productName);
+    public void delete(String productName) throws Exception;
     public Product find(String productName);
-    public void editName(String productName, String newProductName);
-    public void editQuantity(String productName, int newProductQuantity);
+    public void editName(String productName, String newProductName) throws Exception;
+    public void editQuantity(String productName, int newProductQuantity) throws Exception;
 }
