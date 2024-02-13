@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,10 +31,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(String productName) {
-        try {
-            productRepository.delete(productName);
-        } catch (Exception e) {}
+    public void delete(String productName) throws NoSuchElementException {
+        productRepository.delete(productName);
     }
 
     @Override
@@ -42,16 +41,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void editName(String productName, String newProductName) {
-        try {
-            productRepository.editName(productName, newProductName);
-        } catch (Exception e) {}
+    public void editName(String productName, String newProductName) throws NoSuchElementException {
+        productRepository.editName(productName, newProductName);
     }
 
     @Override
-    public void editQuantity(String productName, int newProductQuantity) {
-        try {
-            productRepository.editQuantity(productName, newProductQuantity);
-        } catch (Exception e) {}
+    public void editQuantity(String productName, int newProductQuantity) throws NoSuchElementException {
+        productRepository.editQuantity(productName, newProductQuantity);
     }
 }

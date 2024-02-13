@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/")
@@ -43,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/delete")
-    public String deleteProduct(@RequestParam(name="productName") String productName, Model model) {
+    public String deleteProduct(@RequestParam(name="productName") String productName, Model model) throws NoSuchElementException {
         service.delete(productName);
         return "redirect:list";
     }
@@ -59,7 +60,7 @@ public class ProductController {
     @PostMapping("/product/editName")
     public String editProductName(@RequestParam(name="oldProductName") String productName,
                                   @ModelAttribute Product throwAwayProduct,
-                                  Model model) {
+                                  Model model) throws NoSuchElementException {
         String newProductName = throwAwayProduct.getProductName();
         service.editName(productName, newProductName);
         return "redirect:list";
@@ -68,7 +69,7 @@ public class ProductController {
     @PostMapping("/product/editQuantity")
     public String editProductQuantity(@RequestParam(name="oldProductName") String productName,
                                   @ModelAttribute Product throwAwayProduct,
-                                  Model model) {
+                                  Model model) throws NoSuchElementException {
         int newProductQuantity = throwAwayProduct.getProductQuantity();
         service.editQuantity(productName, newProductQuantity);
         return "redirect:list";
