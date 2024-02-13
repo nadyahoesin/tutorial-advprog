@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository
 public class ProductRepository {
@@ -30,28 +31,28 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public void delete(String productName) throws Exception {
+    public void delete(String productName) throws NoSuchElementException {
         Product product = find(productName);
         if (product == null) {
-            throw new Exception("Product doesn't exist");
+            throw new NoSuchElementException("Product doesn't exist");
         }
 
         productData.remove(product);
     }
 
-    public void editName(String productName, String newProductName) throws Exception {
+    public void editName(String productName, String newProductName) throws NoSuchElementException {
         Product product = find(productName);
         if (product == null) {
-            throw new Exception("Product doesn't exist");
+            throw new NoSuchElementException("Product doesn't exist");
         }
 
         product.setProductName(newProductName);
     }
 
-    public void editQuantity(String productName, int newProductQuantity) throws Exception {
+    public void editQuantity(String productName, int newProductQuantity) throws NoSuchElementException {
         Product product = find(productName);
         if (product == null) {
-            throw new Exception("Product doesn't exist");
+            throw new NoSuchElementException("Product doesn't exist");
         }
 
         product.setProductQuantity(newProductQuantity);
