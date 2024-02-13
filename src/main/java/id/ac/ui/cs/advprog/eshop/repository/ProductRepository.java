@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
+    private String notExistExceptionMessage;
 
     public Product create(Product product) {
         productData.add(product);
@@ -34,7 +35,7 @@ public class ProductRepository {
     public void delete(String productName) throws NoSuchElementException {
         Product product = find(productName);
         if (product == null) {
-            throw new NoSuchElementException("Product doesn't exist");
+            throw new NoSuchElementException(notExistExceptionMessage);
         }
 
         productData.remove(product);
@@ -43,7 +44,7 @@ public class ProductRepository {
     public void editName(String productName, String newProductName) throws NoSuchElementException {
         Product product = find(productName);
         if (product == null) {
-            throw new NoSuchElementException("Product doesn't exist");
+            throw new NoSuchElementException(notExistExceptionMessage);
         }
 
         product.setProductName(newProductName);
