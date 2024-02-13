@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/delete")
-    public String deleteProduct(@RequestParam(name="productName") String productName, Model model) throws Exception {
+    public String deleteProduct(@RequestParam(name="productName") String productName, Model model) throws NoSuchElementException {
         service.delete(productName);
         return "redirect:list";
     }
