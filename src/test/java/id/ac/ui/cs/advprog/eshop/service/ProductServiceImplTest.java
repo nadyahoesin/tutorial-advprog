@@ -113,8 +113,8 @@ public class ProductServiceImplTest {
 
     @Test
     void testDeleteIfNotExist() throws NoSuchElementException {
-        doThrow(Exception.class).when(productRepository).delete("Sampo Cap Bambang");
-        assertThrows(Exception.class, () -> productService.delete("Sampo Cap Bambang"));
+        doThrow(NoSuchElementException.class).when(productRepository).delete("Sampo Cap Bambang");
+        assertThrows(NoSuchElementException.class, () -> productService.delete("Sampo Cap Bambang"));
     }
 
     @Test
@@ -125,8 +125,8 @@ public class ProductServiceImplTest {
 
     @Test
     void testEditNameIfNotExist() throws NoSuchElementException {
-        doThrow(new Exception()).when(productRepository).editName("Sampo Cap Bambang", "Sampo Cap Budi");
-        assertThrows(Exception.class, () -> productService.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
+        doThrow(new NoSuchElementException()).when(productRepository).editName("Sampo Cap Bambang", "Sampo Cap Budi");
+        assertThrows(NoSuchElementException.class, () -> productService.editName("Sampo Cap Bambang", "Sampo Cap Budi"));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class ProductServiceImplTest {
 
     @Test
     void testEditQuantityIfNotExist() throws NoSuchElementException {
-        doThrow(new Exception()).when(productRepository).editQuantity("Sampo Cap Bambang", 50);
-        assertThrows(Exception.class, () -> productService.editQuantity("Sampo Cap Bambang", 50));
+        doThrow(new NoSuchElementException()).when(productRepository).editQuantity("Sampo Cap Bambang", 50);
+        assertThrows(NoSuchElementException.class, () -> productService.editQuantity("Sampo Cap Bambang", 50));
     }
 }
