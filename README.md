@@ -64,4 +64,41 @@ However, while writing and evaluating back the code, I don't know where it's app
 
 ## Reflection
 
-1. 
+1. The code quality issues (according to SonarCloud) that I fixed are:
+
+* **Empty try-catch blocks (#1)**
+
+   For the purpose of error handling, the methods to delete and edit a product on `ProductServiceImpl.java` throws an Exception when the input is inappropriate (when the product to be deleted or edited does not exist). 
+   The methods on `ProductController.java` that call those methods catch the exceptions and do nothing, which resulted in empty catch blocks. 
+   I modified these methods by not using try-catch blocks but instead making the methods throw the Exception as well.
+
+
+* **Generic Exception class (#2)**
+
+   The methods that I previously mentioned all threw an instance of the `Exception` class. 
+   I modified these methods by making them throw an instance of the `NoSuchElementException` class instead, which makes it more clear what causes the Exception.
+
+
+* **Public Test classes (#3 & #7)**
+
+  Some of the Test classes (e.g. `ProductRepositoryTest` or `CreateProductFunctionalTest`) are previously public. 
+  I removed the public modifiers to make these classes have default access modifiers instead.
+
+
+* **Repeating String constants (#4 & #5)**
+
+  Some of the methods in `ProductController` return the same string to redirect the HTTP request to `list/`. 
+  Similarly, some of the methods in `ProductRepository` throws an Exception that contains the same string explaining that the product does not exist.
+  Because the same string is used many times, I declared final String variables of these strings instead and made those methods return these variables.
+
+
+* **No assertion in Test class (#6)**
+
+  Originally, I tested `EshopApplication` just by calling the main function of this class in the Test class (`EshopApplicationTests`).
+  I modified this adding an assertion that assert the main function does not throw an exception when it's called.
+
+
+2. Yes, the current implementation of my CI/CD workflows has met the definition of Continuous Integration and Continuous Deployment.
+   Continuous Integration is defined as "a software development practice where continuous changes & updates in codebase are integrated and verified by an automated build script using various tools."
+   The current implementation of my workflows met this definition by using the build tool Gradle and running tests, both unit and functional tests, everytime there is a push or pull requests on the master branch.
+   Continuous Deployment is when the code is "automatically deployed to the application folder on the specified server" after changes & updates. The current implementation of my workflows ensure this by automatically deploying the application to Koyeb on every push or pull requests on the master branch. 
