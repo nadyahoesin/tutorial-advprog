@@ -70,33 +70,6 @@ class ProductControllerTest {
                         .param("productName", "Sampo Cap Budi")));
     }
 
-//    @Test
-//    void testEditProductPage() throws Exception {
-//        Product product = new Product();
-//        product.setProductName("Sampo Cap Bambang");
-//        product.setProductQuantity(100);
-//        Product throwAwayProduct = new Product();
-//
-////        ReflectionUtils.setField(product., "Sampo Cap Bambang");
-//
-////        Map<String, Object> attributes = new HashMap<>();
-////        attributes.put("product", product);
-////        attributes.put("throwAwayProduct", throwAwayProduct);
-//
-////        EvaluationContext productContext = new StandardEvaluationContext(product);
-//
-//        this.mockMvc.perform(get("/product/edit", product, throwAwayProduct)
-//                        .param("productName", "Sampo Cap Bambang")
-////                        .contentType(MediaType.APPLICATION_JSON)
-////                        .content(objectMapper.writeValueAsString(product)))
-//                //                        .param("productName", "Sampo Cap Bambang"))
-//                        .flashAttr("product", product)
-//                        .flashAttr("throwAwayProduct", throwAwayProduct))
-////                        .flashAttrs(attributes))
-////                .andExpect(model().attribute("product", product))
-//                .andExpect(status().isOk());
-//    }
-
     @Test
     void testEditProductName() throws Exception {
         Product throwAwayProduct = new Product();

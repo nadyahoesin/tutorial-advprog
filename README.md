@@ -1,3 +1,5 @@
+# Module 1 - Coding Standards
+
 ## Reflection 1
 
 Clean code principles and secure coding practices (based on the slides) that have been applied to my code are:
@@ -57,3 +59,9 @@ However, while writing and evaluating back the code, I don't know where it's app
    It is not clear to anyone else what the reason of implementing the test this way and if someone else were to add more elements with `td` tags outside the product list table, it could make the test incorrect. 
    
    Therefore, the cleanliness of the new functional test suite is worse and the new code reduces the overall code quality.
+
+# Module 2 - CI/CD & DevOps
+
+## Reflection
+
+1. 
