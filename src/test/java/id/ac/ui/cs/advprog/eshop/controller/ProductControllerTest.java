@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.service.CarService;
 import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class ProductControllerTest {
     ProductService productService;
 
     @MockBean
-    CarServiceImpl carService;
+    CarService carService;
 
     @Autowired
     MockMvc mockMvc;
