@@ -101,4 +101,8 @@ However, while writing and evaluating back the code, I don't know where it's app
 2. Yes, the current implementation of my CI/CD workflows has met the definition of Continuous Integration and Continuous Deployment.
    Continuous Integration is defined as "a software development practice where continuous changes & updates in codebase are integrated and verified by an automated build script using various tools."
    The current implementation of my workflows met this definition by using the build tool Gradle and running tests, both unit and functional tests, everytime there is a push or pull requests on the master branch.
-   Continuous Deployment is when the code is "automatically deployed to the application folder on the specified server" after changes & updates. The current implementation of my workflows ensure this by automatically deploying the application to Koyeb on every push or pull requests on the master branch. 
+   Continuous Deployment is when the code is "automatically deployed to the application folder on the specified server" after changes & updates. The current implementation of my workflows ensure this by automatically deploying the application to Koyeb on every push or pull requests on the master branch.
+
+# Module 3 - Maintainability & OO Principles
+
+## Reflection
