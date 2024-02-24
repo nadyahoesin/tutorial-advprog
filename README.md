@@ -106,3 +106,69 @@ However, while writing and evaluating back the code, I don't know where it's app
 # Module 3 - Maintainability & OO Principles
 
 ## Reflection
+
+
+1. Here are the principles I've applied to my code:
+
+* **Single Responsibility Principle (SRP)**
+
+  My code follows SRP by having all classes have only one responsibility or encapsulate only one aspect of the software's functionality.
+  The repository classes (both `ProductRepository` and `CarRepository`) are only responsible for executing CRUD operations to the databases.
+  The service classes (both `ProductServiceImpl` and `CarServiceImpl`) are only responsible for calling the methods of the repository classes.
+  The controller classes (both `ProductController` and `CarController`) are only responsible for handling HTTP requests. 
+
+
+* **Open/Closed Principle (OCP)**
+
+  I applied OCP to my code by modifying the `update` method in `CarRepository` to replace the previous `Car` object with a new `Car` object with updated fields on the repository, instead of calling the setter methods of every attribute one by one. 
+  This way, if the `Car` class were to have new attributes, we wouldn't have to modify the `update` method.
+  The modified code follows OCP by being open for development but closed for modification. 
+
+
+* **Liskov’s Substitution Principle (LSP)**
+
+  I applied LSP to my code by not making `CarController` a subclass of `ProductController`, as `CarController` cannot replace `ProductController` without affecting the correctness of the program.
+
+
+* **Interface Segregation Principle (ISP)**
+
+  My code follows ISP by not having large interfaces that cannot be broken down into smaller, more specific interfaces.
+  The only interfaces in my code are `ProductService` and `CarService` and they both only have methods that are relevant for calling the methods in the repository classes.
+
+
+* **Dependency Inversion Principle (DIP)**
+
+  I applied DIP to my code by modifying `CarController` to depend on the interface `CarService` instead of the concrete class `CarServiceImpl`.
+  The modified code follows DIP by having high-level modules not depending on low-level modules, but instead on interfaces.
+
+2. The advantages of applying SOLID principles to my project are:
+
+* **Ensuring that modification to a class will not affect other classes.**
+  
+  For example, modifying the implementation of the `update` method in `CarRepository` doesn't affect the class `CarServiceImpl` that calls the method.
+
+
+* **Making code more readable, maintainable, and reusable.**
+  
+  Shorter classes with only one responsibility are easier to read and understand than longer and more complex classes. 
+  For example, `CarRepository` is easy to read and understand as it only has the familiar CRUD operations.
+  Moreover, shorter classes with only one responsibility and small specific interfaces are easier to reuse as there are fewer chances of the classes or interfaces having methods that are not relevant to them. 
+  For example, `CarRepository` can be reused for new repositories.
+
+
+* **Making code easier to test.**
+
+  Short and simple entities that are open for development and closed for modification are easier to test because you only need to test the extension every time there is one, rather than testing the entire implementation again every time the entity is modified.
+  For example, adding a new class that is functionally an extension of `CarService` means that only the new class needs to be tested, rather than the entire `CarService` class every time there is a new method.
+
+
+3. The disadvantages of not applying SOLID principles to my project are:
+
+* **Inconsistency in code which can lead to incorrectness of the implementation**
+
+  For example, with the previous implementation of the `update` method in `CarRepository`, adding new attributes to the `Car` model would cause that attribute to not be updated in the method.
+
+
+* **Unmaintainable code**
+  
+  For example, if all classes in this project were consolidated into one class, surely the project would be much harder to maintain.
