@@ -1,19 +1,14 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
-import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentTest {
-    private List<Product> products;
-
     @BeforeEach
     void setUp() {
     }
@@ -59,9 +54,8 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "E");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("1234abc", "Voucher", paymentData);
-        });
+        Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
