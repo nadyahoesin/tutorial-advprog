@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Product List</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    </head>
+
+    <body class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+    <div class="flex h-screen">
+        <div class="bg-white p-8 rounded-lg mt-20 m-auto text-center w-4/5">
+            <h2 class="text-4xl font-bold mb-6">List of products</h2>
+            <a th:href="@{/product/create}">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-10 w-60 text-lg">Create a product</button>
+            </a>
+
+            <!-- max-h gabisa?? -->
+            <div class="max-h-96 overflow-y-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                    <tr>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r" name="product_name_header">Product Name</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Quantity</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Edit</th>
+                        <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product: ${products}">
+                        <td th:text="${product.productName}" class="py-2 px-6 border-b border-r"></td>
+                        <td th:text="${product.productQuantity}" class="py-2 px-6 border-b border-r"></td>
+                        <td class="py-2 px-6 border-b border-r">
+                            <a th:href="@{/product/edit(productName=${product.productName})}">
+                                <button class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600">Edit</button>
+                            </a>
+                        </td>
+                        <td class="py-2 px-6 border-b border-r">
+                            <a th:href="@{/product/delete(productName=${product.productName})}">
+                                <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
