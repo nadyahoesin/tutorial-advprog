@@ -50,7 +50,68 @@ public class PaymentTest {
     }
 
     @Test
-    void testAddPaymentVoucherIncorrectCodeLength() {
+    void testAddPaymentVoucherNoVoucherCodeKey() {
+        Map<String, String> paymentData = new HashMap<>();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentVoucherIncorrectVoucherCodeKey() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("kodeVoucher", "ESHOP1234ABC5678");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentCODNoAddressKey() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("deliveryFee", "Rp20.000");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "COD", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentCODNoDeliveryFeeKey() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("address", "Jakarta");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "COD", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentCODIncorrectAddressKey() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("alamat", "Jakarta");
+        paymentData.put("deliveryFee", "Rp20.000");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "COD", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentCODIncorrectDeliveryFeeKey() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("address", "Jakarta");
+        paymentData.put("ongkir", "Rp20.000");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234abc", "COD", paymentData);
+        });
+    }
+
+    @Test
+    void testAddPaymentVoucherIncorrectVoucherCodeLength() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "E");
 
@@ -59,7 +120,7 @@ public class PaymentTest {
     }
 
     @Test
-    void testAddPaymentVoucherIncorrectCodePrefix() {
+    void testAddPaymentVoucherIncorrectVoucherCodePrefix() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHPO1234ABC5678");
 
@@ -68,7 +129,7 @@ public class PaymentTest {
     }
 
     @Test
-    void testAddPaymentVoucherIncorrectCodeNumCharAmount() {
+    void testAddPaymentVoucherIncorrectVoucherCodeNumCharAmount() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234AB56789");
 
