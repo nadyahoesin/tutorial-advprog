@@ -12,40 +12,19 @@ public class Payment {
     private Map<String, String> paymentData;
 
     public Payment(String id, String method, Map<String, String> paymentData) {
-        this.id = id;
-        this.paymentData = paymentData;
+        PaymentMethod paymentMethod;
 
         if (method.equals("Voucher")) {
-            this.method = method;
-
-            int numCharAmount = 0;
-            for (char c : paymentData.get("voucherCode").toCharArray()) {
-                if (Character.isDigit(c)) {
-                    numCharAmount += 1;
-                }
-            }
-
-            if (paymentData.get("voucherCode").length() == 16 &&
-                    paymentData.get("voucherCode").startsWith("ESHOP") &&
-                    numCharAmount == 8)  {
-                this.status = "SUCCESS";
-            } else {
-                this.status = "REJECTED";
-            }
-
+            paymentMethod = new Voucher(paymentData);
         } else if (method.equals("COD")) {
-            this.method = method;
-            if (paymentData.get("address") != null &&
-                    !paymentData.get("address").isEmpty() &&
-                    paymentData.get("deliveryFee") != null &&
-                    !paymentData.get("deliveryFee").isEmpty()) {
-                this.status = "SUCCESS";
-            } else {
-                this.status = "REJECTED";
-            }
-
+            paymentMethod = new COD(paymentData);
         } else {
             throw new IllegalArgumentException();
         }
+
+        this.id = id;
+        this.method = method;
+        this.status = paymentMethod.isValid() ? "SUCCESS" : "REJECTED";
+        this.paymentData = paymentData;
     }
 }
