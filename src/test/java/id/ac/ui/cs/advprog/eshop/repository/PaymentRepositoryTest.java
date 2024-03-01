@@ -23,11 +23,12 @@ public class PaymentRepositoryTest {
     void setUp() {
         this.paymentRepository = new PaymentRepository();
 
-        this.products = new ArrayList<>();
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(2);
+
+        this.products = new ArrayList<>();
         this.products.add(product);
 
         Order order1 = new Order("13652556-012a-4c07-b546-54eb1396d79b",
@@ -35,6 +36,7 @@ public class PaymentRepositoryTest {
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078",
                 this.products, 1708560000L, "Safira Sudrajat");
 
+        this.orders = new ArrayList<>();
         this.orders.add(order1);
         this.orders.add(order2);
 
@@ -45,6 +47,7 @@ public class PaymentRepositoryTest {
         paymentData2.put("address", "Jakarta");
         paymentData2.put("deliveryFee", "Rp20.000");
 
+        this.somePaymentData = new ArrayList<>();
         this.somePaymentData.add(paymentData1);
         this.somePaymentData.add(paymentData2);
     }
@@ -90,11 +93,12 @@ public class PaymentRepositoryTest {
     }
 
     @Test
-    void testGetPaymentInvalidId() {
+    void testGetPaymentIdNotFound() {
         this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
         this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
 
-        assertThrows(IllegalArgumentException.class, () -> this.paymentRepository.getPayment("zczc"));
+        Payment paymentFromGet = this.paymentRepository.getPayment("zczc");
+        assertNull(paymentFromGet);
     }
 
     @Test
