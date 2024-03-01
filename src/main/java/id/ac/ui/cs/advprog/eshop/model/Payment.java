@@ -12,6 +12,16 @@ public class Payment {
     private Map<String, String> paymentData;
 
     public Payment(String id, String method, Map<String, String> paymentData) {
+        // Will throw IllegalArgumentException if invalid
+        PaymentMethod paymentMethod = getAndValidatePaymentMethod(method, paymentData);
+
+        this.id = id;
+        this.method = method;
+        this.status = checkStatus(paymentMethod);
+        this.paymentData = paymentData;
+    }
+
+    private PaymentMethod getAndValidatePaymentMethod(String method, Map<String, String> paymentData) {
         PaymentMethod paymentMethod;
 
         if (method.equals("Voucher")) {
@@ -22,9 +32,10 @@ public class Payment {
             throw new IllegalArgumentException();
         }
 
-        this.id = id;
-        this.method = method;
-        this.status = paymentMethod.isValid() ? "SUCCESS" : "REJECTED";
-        this.paymentData = paymentData;
+        return paymentMethod;
+    }
+
+    private String checkStatus(PaymentMethod paymentMethod) {
+        return (paymentMethod.isValid() ? "SUCCESS" : "REJECTED");
     }
 }
