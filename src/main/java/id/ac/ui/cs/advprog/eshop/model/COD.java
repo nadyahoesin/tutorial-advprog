@@ -19,10 +19,12 @@ public class COD extends PaymentMethod {
                 !deliveryFee.isEmpty();
     }
 
+    @Override
     boolean isPaymentDataSizeIncorrect(Map<String, String> paymentData) {
         return paymentData.size() != 2;
     }
 
+    @Override
     boolean doesPaymentDataNotContainTheRightKey(Map<String, String> paymentData) {
         return !paymentData.containsKey("address") || !paymentData.containsKey("deliveryFee");
     }

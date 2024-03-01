@@ -18,10 +18,12 @@ public class Voucher extends PaymentMethod {
                this.isVoucherCodeNumCharAmountValid();
     }
 
+    @Override
     boolean isPaymentDataSizeIncorrect(Map<String, String> paymentData) {
         return paymentData.size() != 1;
     }
 
+    @Override
     boolean doesPaymentDataNotContainTheRightKey(Map<String, String> paymentData) {
         return !paymentData.containsKey("voucherCode");
     }
