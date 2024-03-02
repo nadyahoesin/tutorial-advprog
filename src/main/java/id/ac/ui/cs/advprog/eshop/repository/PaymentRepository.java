@@ -10,8 +10,7 @@ import java.util.*;
 public class PaymentRepository {
     private Map<Payment, Order> payments = new HashMap<>();
 
-    public Payment addPayment(Order order, String method, Map<String, String> paymentData) {
-        Payment payment = new Payment(this.generateId(), method, paymentData);
+    public Payment addPayment(Order order, Payment payment) {
         this.payments.put(payment, order);
         return payment;
     }

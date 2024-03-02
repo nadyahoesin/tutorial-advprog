@@ -18,6 +18,7 @@ public class PaymentRepositoryTest {
     List<Product> products;
     List<Order> orders;
     List<Map<String, String>> somePaymentData;
+    List<Payment> payments;
 
     @BeforeEach
     void setUp() {
@@ -35,10 +36,13 @@ public class PaymentRepositoryTest {
                 this.products, 1708560000L, "Safira Sudrajat");
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078",
                 this.products, 1708560000L, "Safira Sudrajat");
+        Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697cbf1e",
+                this.products, 1708560000L, "Bambang Sudrajat");
 
         this.orders = new ArrayList<>();
         this.orders.add(order1);
         this.orders.add(order2);
+        this.orders.add(order3);
 
         Map<String, String> paymentData1 = new HashMap<>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");;
@@ -47,55 +51,52 @@ public class PaymentRepositoryTest {
         paymentData2.put("address", "Jakarta");
         paymentData2.put("deliveryFee", "Rp20.000");
 
-        this.somePaymentData = new ArrayList<>();
-        this.somePaymentData.add(paymentData1);
-        this.somePaymentData.add(paymentData2);
+        Map<String, String> paymentData3 = new HashMap<>();
+        paymentData3.put("voucherCode", "ESHOP1234ABC5679");
+
+        Payment payment1 = new Payment("1234abc", "Voucher", paymentData1);
+        Payment payment2 = new Payment("1235abc", "COD", paymentData2);
+        Payment payment3 = new Payment("1236abc", "Voucher", paymentData3);
+
+        this.payments = new ArrayList<>();
+        this.payments.add(payment1);
+        this.payments.add(payment2);
+        this.payments.add(payment3);
     }
 
     @Test
     void testAddPayment() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
-        Order order = new Order("e334ef40-9eff-4da8-9487-8ee697cbf1e",
-                this.products, 1708560000L, "Bambang Sudrajat");
+        Payment payment = this.payments.get(2);
+        Payment addedPayment = this.paymentRepository.addPayment(this.orders.get(2), payment);
 
-        Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "ESHOP1234ABC5679");
-
-        Payment addedPayment = this.paymentRepository.addPayment(order, "Voucher", paymentData);
-
-        assertEquals("Voucher", addedPayment.getMethod());
-        assertEquals(paymentData.keySet(), addedPayment.getPaymentData().keySet());
-        assertEquals(paymentData.get("voucherCode"), addedPayment.getPaymentData().get("voucherCode"));
+        assertEquals(payment.getMethod(), addedPayment.getMethod());
+        assertEquals(payment.getPaymentData().keySet(), addedPayment.getPaymentData().keySet());
+        assertEquals(payment.getPaymentData().get("voucherCode"), addedPayment.getPaymentData().get("voucherCode"));
     }
 
     @Test
     void testGetPayment() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
-        Order order = new Order("e334ef40-9eff-4da8-9487-8ee697cbf1e",
-                this.products, 1708560000L, "Bambang Sudrajat");
+        Payment payment = this.payments.get(2);
+        this.paymentRepository.addPayment(this.orders.get(2), payment);
 
-        Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "ESHOP1234ABC5679");
+        Payment paymentFromGet = this.paymentRepository.getPayment(payment.getId());
 
-        Payment addedPayment = this.paymentRepository.addPayment(order, "Voucher", paymentData);
-        String paymentId = addedPayment.getId();
-
-        Payment paymentFromGet = this.paymentRepository.getPayment(paymentId);
-
-        assertEquals(paymentId, paymentFromGet.getId());
-        assertEquals(addedPayment.getMethod(), paymentFromGet.getMethod());
-        assertEquals(addedPayment.getPaymentData().keySet(), paymentFromGet.getPaymentData().keySet());
-        assertEquals(addedPayment.getPaymentData().get("voucherCode"), paymentFromGet.getPaymentData().get("voucherCode"));
+        assertEquals(payment.getId(), paymentFromGet.getId());
+        assertEquals(payment.getMethod(), paymentFromGet.getMethod());
+        assertEquals(payment.getPaymentData().keySet(), paymentFromGet.getPaymentData().keySet());
+        assertEquals(payment.getPaymentData().get("voucherCode"), paymentFromGet.getPaymentData().get("voucherCode"));
     }
 
     @Test
     void testGetPaymentIdNotFound() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
         Payment paymentFromGet = this.paymentRepository.getPayment("zczc");
         assertNull(paymentFromGet);
@@ -103,8 +104,8 @@ public class PaymentRepositoryTest {
 
     @Test
     void testGetAllPayments() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
         List<Payment> allPayments = this.paymentRepository.getAllPayments();
         assertEquals(2, allPayments.size());
@@ -118,17 +119,14 @@ public class PaymentRepositoryTest {
 
     @Test
     void testGetOrderOfPayment() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
-        Order order = new Order("e334ef40-9eff-4da8-9487-8ee697cbf1e",
-                this.products, 1708560000L, "Bambang Sudrajat");
+        Order order = this.orders.get(2);
+        Payment payment = this.payments.get(2);
 
-        Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "ESHOP1234ABC5679");
-
-        Payment addedPayment = this.paymentRepository.addPayment(order, "Voucher", paymentData);
-        Order orderFromGet = this.paymentRepository.getOrderOfPayment(addedPayment.getId());
+        this.paymentRepository.addPayment(order, payment);
+        Order orderFromGet = this.paymentRepository.getOrderOfPayment(payment.getId());
 
         assertEquals(order.getId(), orderFromGet.getId());
         assertEquals(order.getOrderTime(), orderFromGet.getOrderTime());
@@ -138,8 +136,8 @@ public class PaymentRepositoryTest {
 
     @Test
     void testGetOrderOfPaymentInvalidId() {
-        this.paymentRepository.addPayment(this.orders.get(0), "Voucher", this.somePaymentData.get(0));
-        this.paymentRepository.addPayment(this.orders.get(1), "COD", this.somePaymentData.get(1));
+        this.paymentRepository.addPayment(this.orders.get(0), this.payments.get(0));
+        this.paymentRepository.addPayment(this.orders.get(1), this.payments.get(1));
 
         assertThrows(IllegalArgumentException.class, () -> this.paymentRepository.getOrderOfPayment("zczc"));
     }
