@@ -18,8 +18,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment addPayment(Order order, String method, Map<String, String> paymentData) {
-        String id = UUID.randomUUID().toString();
-        Payment payment = new Payment(id, method, paymentData);
+        Payment payment = new Payment(generateId(), method, paymentData);
         this.paymentRepository.addPayment(order, payment);
         return payment;
     }
@@ -42,5 +41,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public List<Payment> getAllPayments() {
         return this.paymentRepository.getAllPayments();
+    }
+
+    private String generateId() {
+        return UUID.randomUUID().toString();
     }
 }
