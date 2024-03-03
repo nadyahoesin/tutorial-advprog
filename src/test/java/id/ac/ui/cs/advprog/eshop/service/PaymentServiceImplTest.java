@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.Or;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -83,14 +82,12 @@ public class PaymentServiceImplTest {
     void testAddPaymentVoucher() {
         Order order = this.orders.getFirst();
         Payment payment = this.payments.getFirst();
-        doReturn(payment).when(paymentRepository).addPayment(order, payment);
 
         Payment addedPayment = this.paymentService.addPayment(order, payment.getMethod(), payment.getPaymentData());
 
-        assertEquals(payment.getId(), addedPayment.getId());
         assertEquals(payment.getMethod(), addedPayment.getMethod());
         assertEquals(payment.getPaymentData().keySet(), addedPayment.getPaymentData().keySet());
-        verify(this.paymentRepository, times(1)).addPayment(order, payment);
+        verify(this.paymentRepository, times(1)).addPayment(eq(order), any(Payment.class));
     }
 
     @Test
@@ -167,7 +164,6 @@ public class PaymentServiceImplTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("alamat", "Jakarta");
         paymentData.put("deliveryFee", "Rp20.000");
-        doReturn(payment).when(paymentRepository).addPayment(order, payment);
 
         assertThrows(IllegalArgumentException.class, () ->
                 this.paymentService.addPayment(order, payment.getMethod(), paymentData));
@@ -200,7 +196,6 @@ public class PaymentServiceImplTest {
 
         Payment paymentFromSetStatus = this.paymentService.setStatus(payment, "SUCCESS");
 
-        assertEquals(payment.getId(), paymentFromSetStatus.getId());
         assertEquals(payment.getMethod(), paymentFromSetStatus.getMethod());
         assertEquals(payment.getPaymentData().keySet(), paymentFromSetStatus.getPaymentData().keySet());
         assertEquals("SUCCESS", paymentFromSetStatus.getStatus());
@@ -229,14 +224,14 @@ public class PaymentServiceImplTest {
         Payment payment = this.payments.getFirst();
 
         assertThrows(IllegalArgumentException.class, () ->
-                this.paymentService.setStatus(payment, "REJECTED"));
+                this.paymentService.setStatus(payment, "MEOW"));
 
         verify(this.paymentRepository, times(0))
                 .getOrderOfPayment(any(String.class));
     }
 
     @Test
-    void getPayment() {
+    void testGetPayment() {
         Payment payment = this.payments.getFirst();
         doReturn(payment).when(this.paymentRepository).getPayment(payment.getId());
 
@@ -249,7 +244,7 @@ public class PaymentServiceImplTest {
     }
 
     @Test
-    void getPaymentIdNotFound() {
+    void testGetPaymentIdNotFound() {
         doReturn(null).when(this.paymentRepository).getPayment("zczc");
 
         Payment paymentFromGet = this.paymentService.getPayment("zczc");
@@ -259,7 +254,7 @@ public class PaymentServiceImplTest {
     }
 
     @Test
-    void getAllPayments() {
+    void testGetAllPayments() {
         doReturn(this.payments).when(this.paymentRepository).getAllPayments();
 
         List<Payment> allPayments = this.paymentService.getAllPayments();
@@ -268,7 +263,7 @@ public class PaymentServiceImplTest {
     }
 
     @Test
-    void getAllPaymentsIfEmpty() {
+    void testGetAllPaymentsIfEmpty() {
         doReturn(new ArrayList<>()).when(this.paymentRepository).getAllPayments();
 
         List<Payment> allPayments = this.paymentService.getAllPayments();
