@@ -4,6 +4,7 @@ import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Map;
 
 public class PaymentServiceImpl implements PaymentService {
@@ -26,7 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment getAllPayments() {
+    public List<Payment> getAllPayments() {
         return null;
     }
 }
