@@ -176,4 +176,35 @@ public class PaymentTest {
         Payment payment = new Payment("1234abc", "COD", paymentData);
         assertEquals("REJECTED", payment.getStatus());
     }
+
+    @Test
+    void testSetStatusSuccess() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        payment.setStatus("SUCCESS");
+        assertEquals("SUCCESS", payment.getStatus());
+    }
+
+    @Test
+    void testSetStatusRejected() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        payment.setStatus("REJECTED");
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testSetStatusInvalidStatus() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("1234abc", "Voucher", paymentData);
+        assertThrows(IllegalArgumentException.class, () -> {
+            payment.setStatus("MEOW");
+        });
+    }
 }

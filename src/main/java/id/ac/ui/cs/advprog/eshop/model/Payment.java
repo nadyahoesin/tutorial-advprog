@@ -21,6 +21,10 @@ public class Payment {
         this.paymentData = paymentData;
     }
 
+    public void setStatus(String status) {
+        return;
+    }
+
     private PaymentMethod getAndValidatePaymentMethod(String method, Map<String, String> paymentData) {
         PaymentMethod paymentMethod;
 

@@ -15,9 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentRepositoryTest {
     PaymentRepository paymentRepository;
-    List<Product> products;
     List<Order> orders;
-    List<Map<String, String>> somePaymentData;
     List<Payment> payments;
 
     @BeforeEach
@@ -29,15 +27,15 @@ public class PaymentRepositoryTest {
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(2);
 
-        this.products = new ArrayList<>();
-        this.products.add(product);
+        List<Product> products = new ArrayList<>();
+        products.add(product);
 
         Order order1 = new Order("13652556-012a-4c07-b546-54eb1396d79b",
-                this.products, 1708560000L, "Safira Sudrajat");
+                products, 1708560000L, "Safira Sudrajat");
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078",
-                this.products, 1708560000L, "Safira Sudrajat");
+                products, 1708560000L, "Safira Sudrajat");
         Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697cbf1e",
-                this.products, 1708560000L, "Bambang Sudrajat");
+                products, 1708560000L, "Bambang Sudrajat");
 
         this.orders = new ArrayList<>();
         this.orders.add(order1);
