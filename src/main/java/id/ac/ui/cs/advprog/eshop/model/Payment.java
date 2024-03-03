@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 import lombok.Getter;
+import org.apache.el.lang.ELArithmetic;
 
 import java.util.Map;
 
@@ -22,7 +23,11 @@ public class Payment {
     }
 
     public void setStatus(String status) {
-        return;
+        if (status.equals("SUCCESS") || status.equals("REJECTED")) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private PaymentMethod getAndValidatePaymentMethod(String method, Map<String, String> paymentData) {
