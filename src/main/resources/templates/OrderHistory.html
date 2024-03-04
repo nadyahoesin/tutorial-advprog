@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+<div class="flex h-screen">
+    <div class="bg-white p-8 rounded-lg mt-20 m-auto text-center w-4/5">
+        <h2 class="text-4xl font-bold mb-6">Your order history</h2>
+        <a th:href="@{/order/create}">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-10 w-60 text-lg">Create a new order</button>
+        </a>
+
+        <!-- max-h gabisa?? -->
+        <div class="max-h-96 overflow-y-auto">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                <tr>
+                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Order Time</th>
+                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Product Name</th>
+                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Product Quantity</th>
+                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order: ${order}">
+                    <th:block th:each="product: ${order.product}"></th:block>
+                    <td th:datetime="${order.orderTime}" class="py-2 px-6 border-b border-r"></td>
+                    <td th:text="${order.product.productName}" class="py-2 px-6 border-b border-r"></td>
+                    <td th:text="${order.product.productQuantity}" class="py-2 px-6 border-b border-r"></td>
+                    <td th:text="${order.status}" class="py-2 px-6 border-b border-r"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

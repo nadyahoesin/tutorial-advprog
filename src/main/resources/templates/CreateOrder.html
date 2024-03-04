@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Order</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+
+<div class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+    <div class="flex h-screen">
+        <div class="mt-45 bg-white p-8 rounded-lg m-auto">
+            <h2 class="text-4xl font-bold mb-6">Create a new order</h2>
+            <form th:action="@{/order/create}" th:object="${order}" method="post">
+                <div class="mb-4">
+                    <label for="authorName" class="block text-gray-700 text-md font-bold mb-2 text-left">Name</label>
+                    <input th:field="*{order.authorName}" type="text" id="authorNameInput" placeholder="Enter your name" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="paymentData" class="block text-gray-700 text-md font-bold mb-2 text-left">Product Name</label>
+                    <input th:field="*{order.product.productName}" type="text" id="nameInput" placeholder="Enter the name of the product" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <div class="mb-8">
+                    <label for="productQuantity" class="block text-gray-700 text-md font-bold mb-2 text-left">Quantity</label>
+                    <input th:field="*{order.product.productQuantity}" type="text" id="quantityInput" placeholder="Enter the quantity of the product" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
