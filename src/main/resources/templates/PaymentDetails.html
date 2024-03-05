@@ -19,9 +19,9 @@
 <!--                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Submit</button>-->
 <!--            </form>-->
             <p class="block text-gray-700 text-md font-bold text-left">Id:</p>
-            <p th:text="${payment.id}" class="mb-4"></p>
+            <p th:text="${payment.id}" id="paymentId" class="mb-4"></p>
             <p class="block text-gray-700 text-md font-bold mb-2 text-left">Method:</p>
-            <p th:text="${payment.method}" class="mb-4"></p>
+            <p th:text="${payment.method}" id="paymentMethod" class="mb-4"></p>
             <div th:switch="${payment.method}">
                 <div th:case="'Voucher'">
                     <p class="block text-gray-700 text-md font-bold mb-2 text-left">Voucher Code:</p>
