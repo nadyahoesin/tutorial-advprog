@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Payment Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+
+<div class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+    <div class="flex h-screen">
+        <div class="mt-60 bg-white p-8 rounded-lg m-auto">
+            <h2 class="text-4xl font-bold mb-6">Get your payment details</h2>
+            <form th:action="@{'/payment/detail/' + ${payment.id}}" th:object="${payment}" method="get">
+                <div class="mb-8">
+                    <label for="authorNameInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Payment Id</label>
+                    <input th:field="*{id}" type="text" id="authorNameInput" placeholder="Enter your payment Id" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

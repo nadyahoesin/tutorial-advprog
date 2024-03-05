@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Done</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+
+<div class="bg-gradient-to-r from-blue-50 to-red-50 min-h-screen">
+    <div class="flex h-screen">
+        <div class="mt-60 bg-white p-8 rounded-lg m-auto">
+            <h2 class="text-4xl font-bold mb-6">Thank you!</h2>
+            <p class="block text-gray-700 text-md font-bold text-left mb-8">Here's your payment Id:</p>
+            <p th:text="${payment.id}" class="mb-4"></p>
+            <a th:href="@{'/order/payment/' + ${order.id}}">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full text-lg">Back</button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
