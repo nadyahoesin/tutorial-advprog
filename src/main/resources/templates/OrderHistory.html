@@ -19,7 +19,7 @@
             <table class="min-w-full bg-white border border-gray-300">
                 <thead>
                 <tr>
-                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Order Time</th>
+                    <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Order Id</th>
                     <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Product Name</th>
                     <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Product Quantity</th>
                     <th class="py-3 px-6 bg-gray-100 text-center border-b border-r">Status</th>
@@ -28,9 +28,9 @@
                 <tbody>
                 <tr th:each="order: ${orders}">
                     <th:block th:each="product: ${order.products}">
-                        <td th:text="${order.orderTime}" class="py-2 px-6 border-b border-r"></td>
-                        <td th:text="${product.productQuantity}" class="py-2 px-6 border-b border-r"></td>
+                        <td th:text="${order.id}" class="py-2 px-6 border-b border-r"></td>
                         <td th:text="${product.productName}" class="py-2 px-6 border-b border-r"></td>
+                        <td th:text="${product.productQuantity}" class="py-2 px-6 border-b border-r"></td>
                         <td th:text="${order.status}" class="py-2 px-6 border-b border-r"></td>
                     </th:block>
                 </tr>
