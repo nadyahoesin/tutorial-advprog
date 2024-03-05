@@ -11,10 +11,10 @@
     <div class="flex h-screen">
         <div class="mt-60 bg-white p-8 rounded-lg m-auto">
             <h2 class="text-4xl font-bold mb-6">Get your order history</h2>
-            <form th:action="@{/order/history}" th:object="${authorName}" method="post">
-                <div class="mb-4">
-                    <label for="authorName" class="block text-gray-700 text-md font-bold mb-2 text-left">Name</label>
-                    <input th:field="*{authorName}" type="text" id="nameInput" placeholder="Enter your name" class="w-full px-3 py-2 border rounded-md" required>
+            <form th:action="@{/order/history}" th:object="${order}" method="post">
+                <div class="mb-8">
+                    <label for="authorNameInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Name</label>
+                    <input th:field="*{author}" type="text" id="authorNameInput" placeholder="Enter your name" class="w-full px-3 py-2 border rounded-md" required>
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Submit</button>
             </form>

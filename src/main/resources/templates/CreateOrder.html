@@ -13,16 +13,16 @@
             <h2 class="text-4xl font-bold mb-6">Create a new order</h2>
             <form th:action="@{/order/create}" th:object="${order}" method="post">
                 <div class="mb-4">
-                    <label for="authorName" class="block text-gray-700 text-md font-bold mb-2 text-left">Name</label>
-                    <input th:field="*{order.authorName}" type="text" id="authorNameInput" placeholder="Enter your name" class="w-full px-3 py-2 border rounded-md" required>
+                    <label for="authorNameInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Name</label>
+                    <input th:field="*{author}" type="text" id="authorNameInput" placeholder="Enter your name" class="w-full px-3 py-2 border rounded-md" required>
                 </div>
                 <div class="mb-4">
-                    <label for="paymentData" class="block text-gray-700 text-md font-bold mb-2 text-left">Product Name</label>
-                    <input th:field="*{order.product.productName}" type="text" id="nameInput" placeholder="Enter the name of the product" class="w-full px-3 py-2 border rounded-md" required>
+                    <label for="nameInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Product Name</label>
+                    <input th:field="*{products[0].productName}" type="text" id="nameInput" placeholder="Enter the name of the product" class="w-full px-3 py-2 border rounded-md" required>
                 </div>
                 <div class="mb-8">
-                    <label for="productQuantity" class="block text-gray-700 text-md font-bold mb-2 text-left">Quantity</label>
-                    <input th:field="*{order.product.productQuantity}" type="text" id="quantityInput" placeholder="Enter the quantity of the product" class="w-full px-3 py-2 border rounded-md" required>
+                    <label for="quantityInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Quantity</label>
+                    <input th:field="*{products[0].productQuantity}" type="text" id="quantityInput" placeholder="Enter the quantity of the product" class="w-full px-3 py-2 border rounded-md" required>
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Submit</button>
             </form>

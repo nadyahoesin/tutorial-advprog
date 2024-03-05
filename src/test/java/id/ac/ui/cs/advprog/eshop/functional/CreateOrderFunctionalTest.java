@@ -26,7 +26,7 @@ public class CreateOrderFunctionalTest {
     @LocalServerPort
     private int serverPort;
 
-    @Value("${app.baseUrl:http://localhost/order/create}")
+    @Value("${app.baseUrl:http://localhost}")
     private String testBaseUrl;
 
     private String baseUrl;
@@ -38,7 +38,7 @@ public class CreateOrderFunctionalTest {
 
     @Test
     void createOrder(ChromeDriver driver) throws Exception {
-        driver.get(baseUrl);
+        driver.get(String.format("%s/%s", baseUrl, "order/create"));
 
         WebElement authorNameInput = driver.findElement(By.id("authorNameInput"));
         authorNameInput.sendKeys("Safira Sudrajat");
@@ -48,6 +48,11 @@ public class CreateOrderFunctionalTest {
         quantityInput.sendKeys("10");
         WebElement submitButton = driver.findElement(By.name("submit_button"));
         submitButton.click();
+
+        WebElement authorNameInput2 = driver.findElement(By.id("authorNameInput"));
+        authorNameInput2.sendKeys("Safira Sudrajat");
+        WebElement submitButton2 = driver.findElement(By.name("submit_button"));
+        submitButton2.click();
 
         List<WebElement> allTdElements = driver.findElements(By.tagName("td"));
         WebElement myCreationElement = null;
