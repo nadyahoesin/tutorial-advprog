@@ -172,3 +172,19 @@ However, while writing and evaluating back the code, I don't know where it's app
 * **Unmaintainable code**
   
   For example, if all classes in this project were consolidated into one class, surely the project would be much harder to maintain.
+
+
+# Module 4 - Refactoring & TDD
+
+## Reflection
+
+1. This TDD flow is not useful enough for me. 
+   This is because it was harder to imagine each class methods and their parameters without at least making the skeleton of the classes first.
+   Other than that, it was also harder to imagine what negative tests to make without the implementations of the methods.
+   I spent more time thinking about what tests to make rather than making the tests.
+   The next time I make more tests, maybe I should roughly sketch / implement each classes methods, but I'm not sure if this violates TDD.
+
+
+2. The tests I created have mostly followed F.I.R.S.T. principles. 
+   The unit tests I created for Order and Payment classes (besides the Controller classes) have followed F.I.R.S.T. principles as the tests are fast, isolated, repeatable, self-validating, and thorough/timely.
+   The functional tests that I made for exercise 1 don't follow F.I.R.S.T. principles as the tests are still incorrect.
