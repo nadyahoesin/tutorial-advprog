@@ -90,11 +90,9 @@ public class OrderFunctionalTest {
         // Get order id
         List<WebElement> allTrElements = driver.findElements(By.tagName("tr"));
         String orderId = null;
-        for (WebElement trElement : allTrElements) {
-            List<WebElement> tdElements = trElement.findElements(By.tagName("td"));
-            if (tdElements.get(1).getText().equals("Meja")) {
-                orderId = tdElements.getFirst().getText();
-            }
+        List<WebElement> tdElements = allTrElements.get(1).findElements(By.tagName("td"));
+        if (tdElements.get(1).getText().equals("Meja")) {
+            orderId = tdElements.getFirst().getText();
         }
 
         driver.get(String.format("%s/%s/%s", baseUrl, "order/pay", orderId));
@@ -133,11 +131,9 @@ public class OrderFunctionalTest {
         // Get order id
         List<WebElement> allTrElements = driver.findElements(By.tagName("tr"));
         String orderId = null;
-        for (WebElement trElement : allTrElements) {
-            List<WebElement> tdElements = trElement.findElements(By.tagName("td"));
-            if (tdElements.get(1).getText().equals("Meja")) {
-                orderId = tdElements.getFirst().getText();
-            }
+        List<WebElement> tdElements = allTrElements.get(1).findElements(By.tagName("td"));
+        if (tdElements.get(1).getText().equals("Meja")) {
+            orderId = tdElements.getFirst().getText();
         }
 
         driver.get(String.format("%s/%s/%s", baseUrl, "order/pay", orderId));

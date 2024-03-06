@@ -36,11 +36,11 @@
             </div>
             <p class="block text-gray-700 text-md font-bold mb-2 text-left">Current Status:</p>
             <p id="status" th:text="${payment.method}" class="mb-4"></p>
-            <form th:action="@{'/payment/admin/set-status/' + ${payment.id}}" th:object="${payment}" method="post">
-                <button type="submit" th:field="*{status}" id="acceptButton" class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-red-600" value="ACCEPTED">Accept</button>
+            <form th:action="@{'/payment/admin/set-status/(status=ACCEPTED)' + ${payment.id}}" th:object="${payment}" method="post">
+                <button type="submit" id="acceptButton" class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-red-600" value="ACCEPTED">Accept</button>
             </form>
-            <form th:action="@{'/payment/admin/set-status/' + ${payment.id}}" th:object="${payment}" method="post">
-                <button type="submit" th:field="*{status}" id="rejectButton" class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600" value="REJECTED">Reject</button>
+            <form th:action="@{'/payment/admin/set-status/(status=REJECTED)' + ${payment.id}}" th:object="${payment}" method="post">
+                <button type="submit" id="rejectButton" class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600" value="REJECTED">Reject</button>
             </form>
             <a th:href="@{'/payment/admin/list/'}">
                 <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full text-lg">Back</button>

@@ -1,11 +1,12 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 import lombok.Getter;
-import org.apache.el.lang.ELArithmetic;
+import lombok.Setter;
 
 import java.util.Map;
 
 @Getter
+@Setter
 public class Payment {
     private String id;
     private String method;
@@ -19,7 +20,7 @@ public class Payment {
         this.id = id;
         this.method = method;
         this.status = checkStatus(paymentMethod);
-        this.paymentData = paymentData;
+        this.paymentData = getPaymentData(method, paymentData);
     }
 
     public void setStatus(String status) {
@@ -46,5 +47,13 @@ public class Payment {
 
     private String checkStatus(PaymentMethod paymentMethod) {
         return (paymentMethod.isValid() ? "SUCCESS" : "REJECTED");
+    }
+
+    private Map<String, String> getPaymentData(String method, Map<String, String> paymentData) {
+        if (method.equals("COD") && paymentData.get("deliveryFee") == null) {
+            paymentData.put("deliveryFee", String.valueOf(5 + (int)(Math.random() * ((50 - 5) + 1))*1000));
+        }
+
+        return paymentData;
     }
 }

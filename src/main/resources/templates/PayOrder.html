@@ -14,19 +14,19 @@
             <form th:action="@{/order/pay/${orderId}}" th:object="${payment}" method="post">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-md font-bold mb-2 text-left">Payment Method</label>
-                    <input th:field="*{method}" type="radio" id="voucherButton" name="method">
+                    <input th:field="*{method}" type="radio" id="voucherButton" name="method" value="Voucher">
                     <label for="voucherButton" class="text-gray-700 text-md mb-2 pl-2 pr-16">Voucher</label>
-                    <input th:field="*{method}" type="radio" id="codButton" name="method">
+                    <input th:field="*{method}" type="radio" id="codButton" name="method" value="COD">
                     <label for="codButton" class="text-gray-700 text-md mb-2 pl-2">Cash on Delivery</label>
                 </div>
-                <div th:switch="*{payment.method}">
+                <div th:switch="*{method}">
                     <div th:case="'Voucher'" class="mb-8">
                         <label for="voucherCodeInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Voucher Code</label>
-                        <input th:field="*{paymentData.voucherCode}" type="text" id="voucherCodeInput" placeholder="Enter the voucher code" class="w-full px-3 py-2 border rounded-md" required>
+                        <input th:value="*{paymentData['voucherCode']}" type="text" id="voucherCodeInput" placeholder="Enter the voucher code" class="w-full px-3 py-2 border rounded-md" required>
                     </div>
                     <div th:case="'COD'" class="mb-8">
                         <label for="addressInput" class="block text-gray-700 text-md font-bold mb-2 text-left">Address</label>
-                        <input th:field="*{paymentData.address}" type="text" id="addressInput" placeholder="Enter the address for delivery" class="w-full px-3 py-2 border rounded-md" required>
+                        <input th:field="*{paymentData['address']}" type="text" id="addressInput" placeholder="Enter the address for delivery" class="w-full px-3 py-2 border rounded-md" required>
                     </div>
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md text-lg hover:bg-blue-600 w-full" name="submit_button">Pay</button>
